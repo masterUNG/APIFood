@@ -59,10 +59,12 @@ public class ListCategoryFragment extends Fragment {
             Log.d("5MayV3", "Length ==>" + jsonArray.length());
 
             ArrayList<String> stringArrayList = new ArrayList<>();
+            final ArrayList<String> codeStringArrayList1 = new ArrayList<>();
 
             for (int i = 0; i < jsonArray.length(); i += 1) {
                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                 stringArrayList.add(jsonObject1.getString("FTPsgName"));
+                codeStringArrayList1.add(jsonObject1.getString("FTPsgCode"));
                 Log.d("5MayV3", stringArrayList.get(i));
             }
 
@@ -76,6 +78,15 @@ public class ListCategoryFragment extends Fragment {
                         @Override
                         public void onClickItem(View view, int position) {
                             Log.d("5MayV3", "You Click ==> " + position);
+
+//                            Replace Fragment
+                            getActivity()
+                                    .getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.contentMainFragment, ShowListFoodFragment.showListFoodInstance(codeStringArrayList1.get(position)))
+                                    .addToBackStack(null)
+                                    .commit();
+
                         }
                     });
 
