@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.squareup.okhttp.FormEncodingBuilder;
+
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -30,17 +30,14 @@ public class ReadCategoryThread extends AsyncTask<String, Void, String> {
 
             MediaType jsonType = MediaType.parse("application/json; charset=utf-8");
 
-
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("ptPsgName", strings[0]);
 
-            String test = "{\n" +
+            String jsonString = "{\n" +
                     "\t \"ptPsgName\":\"\"\n" +
                     "}";
 
-            RequestBody requestBody = RequestBody.create(jsonType, test);
-
-
+            RequestBody requestBody = RequestBody.create(jsonType, jsonString);
 
             Request.Builder builder = new Request.Builder();
             Request request = builder.url(strings[1]).post(requestBody).build();
